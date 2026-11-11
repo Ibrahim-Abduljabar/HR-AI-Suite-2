@@ -1,31 +1,447 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR AI Suite</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-        h1 {
-            color: #111111;
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            margin: 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR AI Suite | Smart Tools for Your Career</title>
+  <meta name="description" content="Discover smart HR AI Suite tools to build your resume, prepare for interviews, and strengthen your career.">
+  <meta name="theme-color" content="#070b16">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070b16;
+      --border: rgba(148, 163, 184, .16);
+      --text: #eef2ff;
+      --muted: #9aa8bd;
+      --blue: #38bdf8;
+      --green: #34d399;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% -10%, rgba(56,189,248,.18), transparent 42%),
+        radial-gradient(ellipse at 0% 35%, rgba(124,58,237,.12), transparent 35%),
+        var(--bg);
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border: 1px solid rgba(56,189,248,.38);
+      border-radius: 14px;
+      color: var(--blue);
+      background: rgba(56,189,248,.1);
+      font-size: 22px;
+      box-shadow: 0 0 28px rgba(56,189,248,.12);
+    }
+
+    .brand-name,
+    .brand-caption {
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 17px;
+      font-weight: 750;
+    }
+
+    .brand-caption {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .language-link {
+      padding: 9px 14px;
+      border: 1px solid rgba(148,163,184,.2);
+      border-radius: 999px;
+      color: #cbd5e1;
+      background: rgba(15,23,42,.72);
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .language-link:hover {
+      border-color: rgba(56,189,248,.5);
+      color: var(--blue);
+    }
+
+    .hero {
+      padding: 56px 0 48px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: #cbd5e1;
+      background: rgba(15,23,42,.72);
+      font-size: 13px;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(52,211,153,.8);
+    }
+
+    h1 {
+      margin: 22px 0 14px;
+      font-size: clamp(36px, 7vw, 64px);
+      line-height: 1.12;
+      letter-spacing: -.04em;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(15px, 2vw, 18px);
+      line-height: 1.9;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 16px 0 22px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 23px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      padding-bottom: 32px;
+    }
+
+    .project-card {
+      position: relative;
+      display: flex;
+      min-height: 265px;
+      flex-direction: column;
+      padding: 23px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(20,31,54,.86), rgba(8,13,27,.92));
+      box-shadow: 0 18px 45px rgba(0,0,0,.18);
+      transition: transform 160ms ease, border-color 160ms ease;
+    }
+
+    .project-card::before {
+      position: absolute;
+      top: -70px;
+      right: -60px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: var(--glow, rgba(56,189,248,.14));
+      filter: blur(35px);
+      content: "";
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56,189,248,.42);
+    }
+
+    .card-top,
+    .project-card h3,
+    .project-card p,
+    .card-link {
+      position: relative;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .project-icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border: 1px solid rgba(148,163,184,.16);
+      border-radius: 15px;
+      background: rgba(15,23,42,.8);
+      font-size: 23px;
+    }
+
+    .category {
+      padding: 6px 10px;
+      border: 1px solid rgba(148,163,184,.15);
+      border-radius: 999px;
+      color: #b7c3d6;
+      background: rgba(15,23,42,.7);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .project-card h3 {
+      margin: 0 0 9px;
+      font-size: 19px;
+    }
+
+    .project-card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .card-link span {
+      transition: transform 160ms ease;
+    }
+
+    .card-link:hover span {
+      transform: translateX(4px);
+    }
+
+    .note {
+      margin: 0 0 52px;
+      padding: 16px 18px;
+      border: 1px solid rgba(56,189,248,.18);
+      border-radius: 14px;
+      color: #b8c5d8;
+      background: rgba(56,189,248,.055);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    footer {
+      padding: 22px 0 30px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 850px) {
+      .projects {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, 440px);
+      }
+
+      header {
+        padding: 18px 0;
+      }
+
+      .hero {
+        padding: 42px 0 36px;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .project-card {
+        min-height: 240px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>HR AI Suite</h1>
+  <header class="container">
+    <a class="brand" href="https://hr-ai-suite-2.vercel.app/" aria-label="HR AI Suite home">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span>
+        <span class="brand-name">HR AI Suite</span>
+        <span class="brand-caption">Smart tools for your career</span>
+      </span>
+    </a>
+
+    <a class="language-link" href="https://hr-ai-suite-lime.vercel.app/" lang="ar">العربية</a>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>AI-powered tools for your career</span>
+      </div>
+
+      <h1>HR AI Suite</h1>
+
+      <p>
+        Discover HR AI Suite tools that help you build and improve your resume,
+        prepare for interviews, and find your next career opportunity.
+      </p>
+    </section>
+
+    <section class="container" aria-labelledby="projects-title">
+      <div class="section-heading">
+        <h2 id="projects-title">Our Projects</h2>
+        <p>Choose the tool that fits your needs</p>
+      </div>
+
+      <div class="projects">
+        <article class="project-card" style="--glow:rgba(56,189,248,.18)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">🎤</div>
+            <span class="category">Interview Practice</span>
+          </div>
+          <h3>AI Interview Simulator</h3>
+          <p>Practice with realistic interview questions and get feedback on your answers.</p>
+          <a class="card-link" href="https://ai-interview-simulator-exact-2.vercel.app/" target="_blank" rel="noopener noreferrer">
+            Explore project <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(52,211,153,.16)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">✅</div>
+            <span class="category">ATS Match</span>
+          </div>
+          <h3>PassATS AI</h3>
+          <p>Analyze how well your resume matches a job description and ATS requirements.</p>
+          <a class="card-link" href="https://pass-ats-ai-exact-2.vercel.app/" target="_blank" rel="noopener noreferrer">
+            Explore project <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(167,139,250,.17)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">🌍</div>
+            <span class="category">Multilingual CV</span>
+          </div>
+          <h3>PolyCV AI</h3>
+          <p>Create professional CVs in multiple languages using your experience and skills.</p>
+          <a class="card-link" href="https://poly-cv-ai-exast.vercel.app/" target="_blank" rel="noopener noreferrer">
+            Explore project <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(251,191,36,.14)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">✨</div>
+            <span class="category">Resume Builder</span>
+          </div>
+          <h3>ProfileUp AI</h3>
+          <p>Turn your information and experience into a polished, professional resume.</p>
+          <a class="card-link" href="https://profile-up-ai-exact-2.vercel.app/" target="_blank" rel="noopener noreferrer">
+            Explore project <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(244,114,182,.15)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">🔎</div>
+            <span class="category">Candidate Analysis</span>
+          </div>
+          <h3>Smart Recruiters AI</h3>
+          <p>Review CVs and extract skills and experience to support recruitment teams.</p>
+          <a class="card-link" href="https://smart-recruiters-ai-exact-2.vercel.app/" target="_blank" rel="noopener noreferrer">
+            Explore project <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(45,212,191,.15)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">📝</div>
+            <span class="category">HR Summaries</span>
+          </div>
+          <h3>HR Brief AI</h3>
+          <p>Summarize lengthy HR reports and extract key points and recommendations.</p>
+          <a class="card-link" href="https://hr-brief-ai-exact-2.vercel.app/" target="_blank" rel="noopener noreferrer">
+            Explore project <span aria-hidden="true">→</span>
+          </a>
+        </article>
+      </div>
+
+      <p class="note">Note: PolyCV AI is currently available in English only.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 HR AI Suite — Smart tools for your career</div>
+  </footer>
 </body>
 </html>
